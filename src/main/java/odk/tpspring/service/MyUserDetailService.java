@@ -1,28 +1,44 @@
 package odk.tpspring.service;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import odk.tpspring.model.User;
 import odk.tpspring.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Data
 @Service
+@AllArgsConstructor
 public class MyUserDetailService implements UserDetailsService {
-    @Autowired
+
     private UserRepository userRepository;
 
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found whith Username"+username);
+            throw new UsernameNotFoundException("User not found with username: " + username);
         }
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername())
-                .password(user.getPassword())
-                .authorities(new SimpleGrantedAuthority("ROLE_" +user.getRole()))
-                .build();
+
+        // Créer une liste de GrantedAuthority à partir des rôles de l'utilisateur
+        List<GrantedAuthority> authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role))
+                .collect(Collectors.toList());
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                authorities
+        );
     }
 }
+
+

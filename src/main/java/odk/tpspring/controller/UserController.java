@@ -1,7 +1,5 @@
 package odk.tpspring.controller;
 
-
-
 import odk.tpspring.model.User;
 import odk.tpspring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
@@ -35,5 +34,3 @@ public class UserController {
         userService.delete(id);
     }
 }
-
-

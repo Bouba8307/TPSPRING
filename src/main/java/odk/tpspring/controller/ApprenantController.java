@@ -10,10 +10,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/apprenants")
 public class ApprenantController {
+
     @Autowired
     private ApprenantService apprenantService;
 
-    @GetMapping("/read")
+    @GetMapping
     public List<Apprenant> findAll() {
         return apprenantService.findAll();
     }
@@ -33,4 +34,3 @@ public class ApprenantController {
         apprenantService.delete(id);
     }
 }
-

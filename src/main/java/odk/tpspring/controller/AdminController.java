@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admins")
 public class AdminController {
+
     @Autowired
     private AdminService adminService;
 
@@ -33,4 +34,3 @@ public class AdminController {
         adminService.delete(id);
     }
 }
-

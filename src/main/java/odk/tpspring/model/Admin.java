@@ -1,21 +1,16 @@
 package odk.tpspring.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import lombok.Data;
 
+@Data
 @Entity
-@Getter
-@Setter
-public class Admin {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nom;
-    private String prenom;
-    private String telephone;
+@PrimaryKeyJoinColumn(name = "user_id") // Mapping de la clé étrangère dans la table
+public class Admin extends User {
+
     private String email;
+    private String telephone;
+
+    // Getters and setters
 }

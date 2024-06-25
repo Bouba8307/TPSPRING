@@ -5,10 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
+
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="users")
+@Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @Id
@@ -18,6 +20,9 @@ public class User {
     private String username;
     private String password;
     private String name;
-    private String role;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    private Set<String> roles;
 }

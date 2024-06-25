@@ -15,25 +15,25 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_APPRENANT', 'ROLE_FORMATEUR', 'ROLE_ADMIN')")
     public List<Ticket> findAll() {
         return ticketService.findAll();
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_APPRENANT', 'ROLE_FORMATEUR', 'ROLE_ADMIN')")
     public Ticket findById(@PathVariable Long id) {
         return ticketService.findById(id);
     }
 
-    @PostMapping
-    @PreAuthorize("hasRole('ROLE_APPRENANT')")
+    @PostMapping("/create")
     public Ticket save(@RequestBody Ticket ticket) {
         return ticketService.save(ticket);
     }
+    @PutMapping("/update/{id}")
+    public Ticket update(@PathVariable Long id, @RequestBody Ticket ticket) {
+        return ticketService.update(id, ticket);
+    }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_APPRENANT')")
     public void delete(@PathVariable Long id) {
         ticketService.delete(id);
     }

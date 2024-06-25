@@ -1,7 +1,6 @@
 package odk.tpspring.controller;
 
 import odk.tpspring.model.Formateur;
-import odk.tpspring.repository.FormateurRepository;
 import odk.tpspring.service.FormateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +10,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/formateurs")
 public class FormateurController {
-    @Autowired
-    private FormateurService formateurService;
 
     @Autowired
-    private FormateurRepository formateurRepository;
+    private FormateurService formateurService;
 
     @GetMapping
     public List<Formateur> findAll() {
@@ -37,4 +34,3 @@ public class FormateurController {
         formateurService.delete(id);
     }
 }
-
