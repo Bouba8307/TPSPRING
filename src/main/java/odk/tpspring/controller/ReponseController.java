@@ -12,22 +12,26 @@ import java.util.List;
 @RequestMapping("/reponse")
 @Data
 public class ReponseController {
+
     @Autowired
     private final ReponseService reponseService;
-    @PostMapping("/creationReponse")
+
+    @PostMapping("/create")
     public Reponse creation(@RequestBody Reponse reponse){
+        // Assumer que reponse.getFormateur() contient l'objet Formateur ou son ID
         return reponseService.creerReponse(reponse);
     }
-
 
     @GetMapping("/Liste")
     public List<Reponse> read(){
         return reponseService.lireReponse();
     }
-    @PutMapping("modifier/{id}")
-    public Reponse modif(@PathVariable long id,@RequestBody Reponse reponse){
-        return reponseService.moddifierReponse(id,reponse);
+
+    @PutMapping("/modifier/{id}")
+    public Reponse modif(@PathVariable long id, @RequestBody Reponse reponse){
+        return reponseService.moddifierReponse(id, reponse);
     }
+
     @DeleteMapping("/supprimer/{id}")
     public String supprim(@PathVariable long id){
         return reponseService.suppReponse(id);
