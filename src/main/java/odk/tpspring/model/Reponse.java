@@ -17,6 +17,4 @@ public class Reponse {
     @ManyToOne
     private Ticket ticket;
 
-    @ManyToOne
-    private Formateur formateur; // Relation ManyToOne avec Formateur
-}
+    }

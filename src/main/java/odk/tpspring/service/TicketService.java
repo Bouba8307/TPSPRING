@@ -35,7 +35,6 @@ public class TicketService {
             existingTicket.setCategorie(ticket.getCategorie());
             existingTicket.setDateCreation(ticket.getDateCreation());
             existingTicket.setDateDernMod(ticket.getDateDernMod());
-            existingTicket.setApprenant(ticket.getApprenant());
             return ticketRepository.save(existingTicket);
         } else {
             return null; // ou lance une exception appropriée

@@ -31,7 +31,6 @@ public class ReponseServiceImplement implements ReponseService {
         return reponseRepository.findById(id)
                 .map((re)->{
                     re.setCorpReponse(re.getCorpReponse());
-                    re.setFormateur(re.getFormateur());
                     re.setTicket(re.getTicket());
                     return reponseRepository.save(re);
                 }).orElseThrow(()->new RuntimeException("Role introuvable"));

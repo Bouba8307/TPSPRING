@@ -21,12 +21,8 @@ public class User {
     private String password;
     private String name;
 
-
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role")
-    private Set<String> roles;
+    @Enumerated(EnumType.STRING)
+    private Role roles;
     private String email;
     private String telephone;
 

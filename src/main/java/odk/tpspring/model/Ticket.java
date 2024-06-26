@@ -24,6 +24,6 @@ public class Ticket {
     private LocalDateTime dateCreation;
     private LocalDateTime dateDernMod;
 
-    @ManyToOne
-    private Apprenant apprenant;
+
+
 }

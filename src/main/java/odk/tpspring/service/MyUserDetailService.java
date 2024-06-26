@@ -28,16 +28,10 @@ public class MyUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found with email: " + email);
         }
 
-        // Créer une liste de GrantedAuthority à partir des rôles de l'utilisateur
-        List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role))
-                .collect(Collectors.toList());
-
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                authorities
-        );
+        return org.springframework.security.core.userdetails.User.withUsername(user.getUsername()).
+                password(user.getPassword()).
+                roles(String.valueOf(user.getRoles())).
+                build();
     }
 }
 
