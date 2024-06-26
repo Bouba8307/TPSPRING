@@ -1,20 +1,18 @@
 package odk.tpspring.service;
 
+import lombok.AllArgsConstructor;
 import odk.tpspring.model.User;
 import odk.tpspring.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public List<User> findAll() {
@@ -37,5 +35,10 @@ public class UserService {
 
     public void delete(Long id) {
         userRepository.deleteById(id);
+    }
+
+    // Ajout de la méthode findByEmail
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

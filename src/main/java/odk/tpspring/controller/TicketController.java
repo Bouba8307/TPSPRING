@@ -32,6 +32,9 @@ public class TicketController {
     public Ticket update(@PathVariable Long id, @RequestBody Ticket ticket) {
         return ticketService.update(id, ticket);
     }
+    @PutMapping("/updateReponse/{id}")
+    public Ticket updateReponse(@PathVariable Long id,@RequestBody Ticket ticket) {
+        return  ticketService.updateReponse(id, ticket);}
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {

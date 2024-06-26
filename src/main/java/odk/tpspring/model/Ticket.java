@@ -24,6 +24,10 @@ public class Ticket {
     private LocalDateTime dateCreation;
     private LocalDateTime dateDernMod;
 
+    @Column(length = 5000)
+    private String reponse;
+
+
 
 
 }

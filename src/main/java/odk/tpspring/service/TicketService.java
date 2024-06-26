@@ -27,18 +27,25 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
+    public Ticket updateReponse(Long id, Ticket ticket) {
+        return ticketRepository.findById(id)
+                .map(p->{
+                    p.setReponse(ticket.getReponse());
+                    return ticketRepository.save(p);
+                }).orElseThrow(()-> new RuntimeException("erreur"));
+    }
+
     public Ticket update(Long id, Ticket ticket) {
-        Ticket existingTicket = ticketRepository.findById(id).orElse(null);
-        if (existingTicket != null) {
-            existingTicket.setDescription(ticket.getDescription());
-            existingTicket.setPriorite(ticket.getPriorite());
-            existingTicket.setCategorie(ticket.getCategorie());
-            existingTicket.setDateCreation(ticket.getDateCreation());
-            existingTicket.setDateDernMod(ticket.getDateDernMod());
-            return ticketRepository.save(existingTicket);
-        } else {
-            return null; // ou lance une exception appropriée
-        }
+        return ticketRepository.findById(id)
+                .map(p->{
+                    p.setDescription(ticket.getDescription());
+                    p.setPriorite(ticket.getPriorite());
+                    p.setCategorie(ticket.getCategorie());
+                    p.setDateCreation(ticket.getDateCreation());
+                    p.setDateDernMod(ticket.getDateDernMod());
+                    p.setReponse(ticket.getReponse());
+                    return ticketRepository.save(p);
+        }).orElseThrow(()-> new RuntimeException("Erreur"));
     }
 
     public void delete(Long id) {

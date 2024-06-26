@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize->{
                     authorize.requestMatchers("api/users/**").hasRole("ADMIN")
                             .requestMatchers("api/tickets/create").hasRole("APPRENANT")
-                            .requestMatchers("api/articles/**").hasRole("FORMATEUR")
+                            .requestMatchers("api/articles/**", "api/tickets/updateReponse/**").hasRole("FORMATEUR")
                             .requestMatchers("api/articles/read").hasAnyRole("FORMATEUR", "APPRENANT")
                             .anyRequest().authenticated();
                 })
